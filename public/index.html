@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Penny Bin POS Simulator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 24px;
+            width: 360px;
+        }
+        h2 { margin-top: 0; color: #1a1f36; font-size: 20px; border-bottom: 2px solid #f4f6f8; padding-bottom: 12px;}
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #4f566b; font-size: 14px; }
+        input[type="number"] {
+            width: 100%; padding: 12px; border: 1px solid #a5aab5; border-radius: 6px;
+            font-size: 18px; box-sizing: border-box; font-weight: bold;
+        }
+        button {
+            width: 100%; background-color: #5469d4; color: white; border: none; padding: 14px;
+            border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.15s;
+        }
+        button:hover { background-color: #0048b5; }
+        .bin-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: #fffdeb; border: 2px dashed #e3b000; border-radius: 12px; padding: 30px; text-align: center;
+        }
+        .bin-visual { font-size: 64px; margin-bottom: 10px; }
+        .bin-count { font-size: 32px; font-weight: bold; color: #b28000; }
+        .log-box {
+            margin-top: 15px; background: #f8f9fa; border: 1px solid #e3e8ee;
+            border-radius: 6px; padding: 12px; font-size: 14px; color: #3c4257; min-height: 80px;
+        }
+        .badge {
+            display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;
+            color: white; margin-bottom: 8px;
+        }
+        .badge-up { background-color: #e56b6f; }
+        .badge-down { background-color: #2ec4b6; }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT SIDE: THE RETAIL CASH REGISTER TERMINAL -->
+    <div class="card">
+        <h2>🖥️ POS Checkout Register</h2>
+        <div class="form-group">
+            <label for="billAmount">Enter Sale Total ($):</label>
+            <input type="number" id="billAmount" step="0.01" value="10.02" min="0.01">
+        </div>
+        <button onclick="processCheckout()">Trigger Checkout</button>
+        
+        <div id="receiptLog" class="log-box" style="display: none;">
+            <!-- Live receipt readout inserts here dynamically -->
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE: THE DIGITAL PUBLIC PENNY BIN -->
+    <div class="card">
+        <h2>🍯 Shared Community Bin</h2>
+        <div class="bin-container">
+            <div class="bin-visual">🪙</div>
+            <div id="binTally" class="bin-count">0¢</div>
+            <span style="color: #697386; font-size: 12px; font-weight: 600; margin-top: 4px;">MAX CAP: 4¢</span>
+        </div>
+    </div>
+
+    <script>
+        async function processCheckout() {
+            const billInput = document.getElementById('billAmount').value;
+            const originalBill = parseFloat(billInput);
+            
+            if (isNaN(originalBill) || originalBill <= 0) {
+                alert("Please enter a valid bill total.");
+                return;
+            }
+
+            // Extract the fractional cent component mathematically (e.g. 10.02 -> 2)
+            const centsString = (originalBill.toFixed(2)).split('.')[1];
+            const fractionalCents = parseInt(centsString) % 5;
+
+            try {
+                // Ping your active server endpoint directly over local web protocols
+                const response = await fetch('http://localhost:3000/api/pos/transaction', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ transactionCents: fractionalCents })
+                });
+
+                const data = await response.json();
+                
+                if (data.status === "success") {
+                    // Update our live visual ledger display element on screen
+                    document.getElementById('binTally').innerText = data.currentBinBalance + '¢';
+                    
+                    // Render the simulated print receipt readouts on the screen interface
+                    const receiptBox = document.getElementById('receiptLog');
+                    receiptBox.style.display = 'block';
+                    
+                    let adjustedBill = originalBill;
+                    let actionBadge = '';
+                    
+                    if (data.action === "ROUND_DOWN") {
+                        adjustedBill = originalBill - (data.adjustmentCents / 100);
+                        actionBadge = `<span class="badge badge-down">ROUND DOWN (-${data.adjustmentCents}¢)</span>`;
+                    } else {
+                        adjustedBill = originalBill + (data.adjustmentCents / 100);
+                        actionBadge = `<span class="badge badge-up">ROUND UP (+${data.adjustmentCents}¢)</span>`;
+                    }
+                    
+                    receiptBox.innerHTML = `
+                        ${actionBadge}<br>
+                        Original Ring: $${originalBill.toFixed(2)}<br>
+                        <strong>Amount Paid: $${adjustedBill.toFixed(2)}</strong>
+                    `;
+                }
+            } catch (err) {
+                console.error("Connection error:", err);
+                alert("Could not connect to the cloud server backend.");
+            }
+        }
+    </script>
+</body>
+</html>
