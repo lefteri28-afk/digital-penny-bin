@@ -1,4 +1,5 @@
 DPB - Digital Penny Bin
+
 A settlement-free fractional-value pooling system for heterogeneous point-of-sale networks.
 
 Status: Early / pre-production.
@@ -8,17 +9,20 @@ Patent Pending: U.S. Provisional Patent Application filed September 2026.
 Looking for contributors to help harden the core engine and build platform integrations — see How to Contribute below.
 
 What is DPB?
+
 DPB lets point-of-sale terminals — even ones configured with completely different rounding rules (round to the nearest nickel vs. round to the nearest dollar) — share a single pooled balance for fractional-cent change.
 
 Instead of a customer's $0.03 in change disappearing into a coin jar or a rounding error, it gets tracked in a shared ledger and used to give the next customer, at any connected terminal, a discount that rounds their total down instead of up.
 
 The core technical problems this project solves:
+
 Cross-tier funding: A terminal configured for dollar-level rounding can fund discounts at a terminal configured for nickel-level rounding, without either terminal knowing the other exists.
 Offline tolerance: A terminal that loses its network connection keeps working against a local buffer, and reconciles back into the shared ledger when it reconnects, without corrupting the shared balance even if multiple terminals reconnect at once.
 Tamper-evident auditing: Every balance change is chained cryptographically (HMAC-SHA256) so the full history is verifiable.
 Full technical detail is in /docs/architecture.md.
 
 Honesty About Where This Project Is Right Now
+
 I built the core design and initial implementation with heavy AI-assisted development, working through the architecture, edge cases, and prior art landscape in detail, but without a traditional software engineering background of my own.
 
 The core logic and system design are original work that I've stress-tested as hard as I can on my end, but this codebase has not been reviewed by professional engineers for production-grade concurrency safety, security hardening, or scale.
@@ -26,9 +30,11 @@ The core logic and system design are original work that I've stress-tested as ha
 That's exactly why this repo exists: I'm looking for engineers who can review the concurrency model, harden the reconciliation logic, write real test coverage, and build the platform integrations I can't build myself. If that sounds like an interesting problem, I'd genuinely welcome the help.
 
 Patent Status
+
 A U.S. Provisional Patent Application covering the cross-tier funding mechanism and offline reconciliation protocol was filed in September 2026. A provisional application is not an issued patent and does not guarantee one will be granted — it establishes a priority date while the underlying invention is evaluated further.
 
 License
+
 (This project is preparing to utilize a specialized licensing model, such as the Business Source License (BSL), to allow open viewing and contribution while preserving commercialization rights during an initial period. Full license terms will be updated here shortly.)
 
 Repository Structure
