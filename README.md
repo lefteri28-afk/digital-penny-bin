@@ -32,6 +32,7 @@ License
 (This project is preparing to utilize a specialized licensing model, such as the Business Source License (BSL), to allow open viewing and contribution while preserving commercialization rights during an initial period. Full license terms will be updated here shortly.)
 
 Repository Structure
+
 dpb/
 ├── core/                               # Ledger engine, tier logic, reconciliation
 │   ├── ledger.py                       # Shared balance, Take/Give/Exact decision logic
@@ -50,6 +51,7 @@ dpb/
 The core engine is deliberately platform-agnostic. Adapters translate between a specific POS platform's API/webhook model and the core engine's transaction interface — contributing an adapter doesn't require understanding the reconciliation internals, and contributing to the core doesn't require knowing any specific POS platform.
 
 What Help Is Actually Needed
+
 Concurrency review: The reconciliation engine uses version-checked compare-and-swap to serialize concurrent terminal writes and admission-control logic to prevent the shared balance's ceiling from being exceeded when multiple offline terminals reconcile at once. This needs eyes from someone with real distributed-systems experience.
 Test coverage: The core Take/Give/Exact logic, tier boundary conditions, and reconciliation edge cases (concurrent reconnects, duplicate batch submission, partial ceiling admission) need real test suites.
 Security review: Particularly around HMAC key management and the plausibility/anomaly-detection bounds on offline batch reconciliation.
@@ -59,10 +61,12 @@ Documentation: Clearer setup instructions, a proper API reference, and a "gettin
 Check CONTRIBUTING.md for good-first-issue labels.
 
 What's in It for Contributors
+
 Open-source credit and collaborative development on a genuinely interesting distributed-systems problem (heterogeneous consensus over a bounded shared resource with offline-tolerant reconciliation).
 Future alignment: [TO BE FINALIZED — structure under development for rewarding significant early contributors as the project matures toward commercialization].
 
 Contributing & IP Housekeeping
+
 Before any pull request is merged, contributors will be asked to agree to a Developer Certificate of Origin (DCO) or Contributor License Agreement (mechanism TBD, see CONTRIBUTING.md).
 
 This is to keep a clean, unambiguous ownership record for the codebase as the project evolves.
