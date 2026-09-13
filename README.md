@@ -17,8 +17,11 @@ Looking for contributors to help harden the core engine and build platform integ
 The core technical problems this project solves:
 
 Cross-tier funding: A terminal configured for dollar-level rounding can fund discounts at a terminal configured for nickel-level rounding, without either terminal knowing the other exists.
+
 Offline tolerance: A terminal that loses its network connection keeps working against a local buffer, and reconciles back into the shared ledger when it reconnects, without corrupting the shared balance even if multiple terminals reconnect at once.
+
 Tamper-evident auditing: Every balance change is chained cryptographically (HMAC-SHA256) so the full history is verifiable.
+
 Full technical detail is in /docs/architecture.md.
 
 Honesty About Where This Project Is Right Now
