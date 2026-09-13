@@ -1,6 +1,10 @@
 DPB - Digital Penny Bin
 
-A settlement-free fractional-value pooling system for heterogeneous point-of-sale networks.
+What is it?
+
+DPB is a digital version of the classic "give a penny / take a penny" tray found next to cash registers. Instead of a plastic bin, the change is stored in a shared ledger and used to conduct cashless micro-transactions at the point-of-sale. 
+
+In essence, DPB provides a settlement-free fractional-value pooling system for heterogeneous point-of-sale networks.
 
 Status: Early / pre-production.
 
