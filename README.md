@@ -42,22 +42,23 @@ License
 
 Repository Structure
 
+```text
 dpb/
-├── core/                               # Ledger engine, tier logic, reconciliation
-│   ├── ledger.py                       # Shared balance, Take/Give/Exact decision logic
-│   ├── reconciliation.py               # Admission control, idempotency, offline sync
-│   └── audit_chain.py                  # HMAC-SHA256 chaining
-├── adapters/                           # Platform-specific integrations
-│   ├── square/                         # (help wanted)
-│   ├── toast/                          # (help wanted)
-│   ├── odoo/                           # (help wanted)
-│   └── generic_rest/                   # Minimal reference REST API
+├── core/                                # Ledger engine, tier logic, reconciliation
+│   ├── ledger.py                        # Shared balance, Take/Give/Exact decision logic
+│   ├── reconciliation.py                # Admission control, idempotency, offline sync
+│   └── audit_chain.py                   # HMAC-SHA256 chaining
+├── adapters/                            # Platform-specific integrations
+│   ├── square/                          # (help wanted)
+│   ├── toast/                           # (help wanted)
+│   ├── odoo/                            # (help wanted)
+│   └── generic_rest/                    # Minimal reference REST API
 ├── docs/
-│   ├── architecture.md                 # Full technical writeup
+│   ├── architecture.md                  # Full technical writeup
 │   └── reconciliation-protocol.md
 ├── tests/
 └── CONTRIBUTING.md
-
+```
 The core engine is deliberately platform-agnostic. Adapters translate between a specific POS platform's API/webhook model and the core engine's transaction interface — contributing an adapter doesn't require understanding the reconciliation internals, and contributing to the core doesn't require knowing any specific POS platform.
 
 What Help Is Actually Needed
