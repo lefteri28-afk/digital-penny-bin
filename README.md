@@ -54,14 +54,19 @@ dpb/
 │   └── reconciliation-protocol.md
 ├── tests/
 └── CONTRIBUTING.md
+
 The core engine is deliberately platform-agnostic. Adapters translate between a specific POS platform's API/webhook model and the core engine's transaction interface — contributing an adapter doesn't require understanding the reconciliation internals, and contributing to the core doesn't require knowing any specific POS platform.
 
 What Help Is Actually Needed
 
 Concurrency review: The reconciliation engine uses version-checked compare-and-swap to serialize concurrent terminal writes and admission-control logic to prevent the shared balance's ceiling from being exceeded when multiple offline terminals reconcile at once. This needs eyes from someone with real distributed-systems experience.
+
 Test coverage: The core Take/Give/Exact logic, tier boundary conditions, and reconciliation edge cases (concurrent reconnects, duplicate batch submission, partial ceiling admission) need real test suites.
+
 Security review: Particularly around HMAC key management and the plausibility/anomaly-detection bounds on offline batch reconciliation.
+
 Platform adapters: Square, Toast, Odoo, Clover, and others. If you know one of these platforms well, this is the most self-contained way to contribute.
+
 Documentation: Clearer setup instructions, a proper API reference, and a "getting started" path for someone spinning this up for the first time.
 
 Check CONTRIBUTING.md for good-first-issue labels.
