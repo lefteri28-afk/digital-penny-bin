@@ -1,22 +1,18 @@
 DPB - Digital Penny Bin
 
-What is it?
+What is DPB?
 
-DPB is a digital version of the classic "give a penny / take a penny" tray found next to cash registers. Instead of a plastic bin, the change is stored in a shared ledger and used to conduct cashless micro-transactions at the point-of-sale. 
+DPB is a digital version of the classic "give a penny / take a penny" tray found next to cash registers. Instead of a plastic bin, the change is stored in a shared ledger and used to conduct cashless micro-transactions at the point-of-sale (POS).
 
-In essence, DPB provides a settlement-free fractional-value pooling system for heterogeneous point-of-sale networks.
+In essence, DPB provides a settlement-free fractional-value pooling system for heterogeneous POS networks. It allows POS terminals — even ones configured with completely different rounding rules (round to the nearest nickel vs. round to the nearest dollar) — share a single pooled balance for fractional-cent change.
+
+Instead of a customer's $0.03 in change disappearing into a coin jar or a rounding error, it gets tracked in a shared ledger and used to give the next customer, at any connected terminal, a discount that rounds their total down instead of up.
 
 Status: Early / pre-production.
 
 Patent Pending: U.S. Provisional Patent Application filed September 2026.
 
 Looking for contributors to help harden the core engine and build platform integrations — see How to Contribute below.
-
-What is DPB?
-
-DPB lets point-of-sale terminals — even ones configured with completely different rounding rules (round to the nearest nickel vs. round to the nearest dollar) — share a single pooled balance for fractional-cent change.
-
-Instead of a customer's $0.03 in change disappearing into a coin jar or a rounding error, it gets tracked in a shared ledger and used to give the next customer, at any connected terminal, a discount that rounds their total down instead of up.
 
 The core technical problems this project solves:
 
