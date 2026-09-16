@@ -1,6 +1,4 @@
-DPB - Digital Penny Bin
-
-What is DPB?
+What is Digital Penny Bin (DPB)?
 
 DPB is a digital version of the classic "give a penny / take a penny" tray found next to cash registers. Instead of a plastic bin, the change is stored in a shared ledger and used to conduct cashless micro-transactions at the point-of-sale (POS).
 
@@ -87,7 +85,18 @@ Before any pull request is merged, contributors will be asked to agree to a Deve
 This is to keep a clean, unambiguous ownership record for the codebase as the project evolves.
 
 Getting Started
-(Setup instructions coming soon)
+## Running the POS UI & Demo Server
+
+The POS interface and demonstration server run on Python 3 using built-in standard libraries (no external heavy frameworks required).
+
+### Prerequisites
+* Python 3.10+
+* Git
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
+cd digital-penny-bin
 
 Questions & Getting in Touch
 (Contact method / GitHub Discussions coming soon)
