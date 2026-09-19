@@ -96,20 +96,27 @@ Git
 Step 1: Clone the Repository
 
 git clone 
+
 [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
+
 cd digital-penny-bin
 
 Step 2: Navigate into the folder
+
 cd digital-penny-bin
 
 Step 3: Start the folder
+
 MacOS/Linux
+
 python3 -m adapters.generic_rest.server
 
 Windows
+
 python -m adapters.generic_rest.server
 
 Step 4: View the UI
+
 Open your browser and go to http://localhost:8000
 
 Questions & Getting in Touch
