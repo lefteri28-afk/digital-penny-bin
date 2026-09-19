@@ -94,7 +94,9 @@ Python 3.10+
 Git
 
 Step 1: Clone the Repository
-git clone [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
+
+git clone 
+[https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
 cd digital-penny-bin
 
 Step 2: Navigate into the folder
