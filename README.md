@@ -96,7 +96,6 @@ Git
 Step 1: Clone the Repository
 
 git clone 
-
 [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
 
 cd digital-penny-bin
@@ -107,11 +106,11 @@ cd digital-penny-bin
 
 Step 3: Start the folder
 
-MacOS/Linux
+*MacOS/Linux
 
 python3 -m adapters.generic_rest.server
 
-Windows
+*Windows
 
 python -m adapters.generic_rest.server
 
