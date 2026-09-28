@@ -8,8 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-// Initialize community buffer at the full 4¢ max cap ceiling
-let globalBinBalance = 4; 
+let globalBinBalance = 1; 
 const MAX_CAP = 4;
 
 app.get('/api/health', (req, res) => {
@@ -20,23 +19,18 @@ app.post('/api/pos/transaction', (req, res) => {
   const { transactionCents, amount } = req.body;
   const totalCents = transactionCents !== undefined ? transactionCents : Math.round((amount || 0) * 100);
   
-  const remainder = totalCents % 100;
+  // 5-cent (nickel) increment rounding rule
+  const remainder = totalCents % 5;
   let action = 'EXACT';
   let adjustmentCents = 0;
 
   if (remainder > 0) {
-    if (globalBinBalance >= remainder) {
-      action = 'ROUND_DOWN';
-      adjustmentCents = remainder;
-      globalBinBalance -= remainder;
-    } else {
-      action = 'ROUND_UP';
-      adjustmentCents = 100 - remainder;
-      globalBinBalance = Math.min(MAX_CAP, globalBinBalance + adjustmentCents);
-    }
+    action = 'ROUND_UP';
+    adjustmentCents = 5 - remainder;
+    globalBinBalance = Math.min(MAX_CAP, globalBinBalance + adjustmentCents);
   }
 
-  const adjustedTotalCents = action === 'ROUND_DOWN' ? totalCents - adjustmentCents : totalCents + adjustmentCents;
+  const adjustedTotalCents = totalCents + adjustmentCents;
 
   res.json({
     status: 'success',
