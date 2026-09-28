@@ -8,8 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-// Initialize community buffer cleanly at 0¢
-let globalBinBalance = 0; 
+// Initialize community buffer cleanly at 3¢ for testing state machine, bounded by 4¢ max cap
+let globalBinBalance = 3; 
 const MAX_CAP = 4;
 
 app.get('/api/health', (req, res) => {
@@ -26,12 +26,19 @@ app.post('/api/pos/transaction', (req, res) => {
   let adjustmentCents = 0;
 
   if (remainder > 0) {
-    action = 'ROUND_UP';
-    adjustmentCents = 5 - remainder;
-    globalBinBalance = Math.min(MAX_CAP, globalBinBalance + adjustmentCents);
+    // Mode 1 State Machine: TAKE if bin liquidity supports it, else GIVE
+    if (globalBinBalance >= remainder) {
+      action = 'ROUND_DOWN';
+      adjustmentCents = remainder;
+      globalBinBalance -= remainder;
+    } else {
+      action = 'ROUND_UP';
+      adjustmentCents = 5 - remainder;
+      globalBinBalance = Math.min(MAX_CAP, globalBinBalance + adjustmentCents);
+    }
   }
 
-  const adjustedTotalCents = totalCents + adjustmentCents;
+  const adjustedTotalCents = action === 'ROUND_DOWN' ? totalCents - adjustmentCents : totalCents + adjustmentCents;
 
   res.json({
     status: 'success',
