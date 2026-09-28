@@ -8,7 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-let globalBinBalance = 1; 
+// Initialize community buffer cleanly at 0¢
+let globalBinBalance = 0; 
 const MAX_CAP = 4;
 
 app.get('/api/health', (req, res) => {
