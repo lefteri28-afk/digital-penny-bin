@@ -93,7 +93,7 @@
 
             try {
                 // Ping your active server endpoint directly over local web protocols
-                const response = await fetch('http://localhost:3000/api/pos/transaction', {
+                const response = await fetch('/api/pos/transaction', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ transactionCents: fractionalCents })
