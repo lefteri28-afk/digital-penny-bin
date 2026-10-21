@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 DPB - Digital Penny Bin
-A settlement-free fractional-value pooling system for heterogeneous point-of-sale networks.
+How to achieve zero-latency, fee-free state transitions in a closed-loop micro-ledger..
 =======
 What is Digital Penny Bin (DPB)?
 
