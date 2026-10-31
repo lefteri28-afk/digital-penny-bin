@@ -95,43 +95,24 @@ dpb/
 ├── tests/
 └── CONTRIBUTING.md
 
-What Help Is Actually Needed
+## What Help Is Actually Needed
 
-Concurrency review: The reconciliation engine uses version-checked compare-and-swap to serialize concurrent terminal writes and admission-control logic to prevent the shared balance's ceiling from being exceeded when multiple offline terminals reconcile at once. This needs eyes from someone with real distributed-systems experience.
+* **Concurrency review:** The reconciliation engine uses version-checked compare-and-swap to serialize concurrent terminal writes and admission-control logic to prevent the shared balance's ceiling from being exceeded when multiple offline terminals reconcile at once. This needs eyes from someone with real distributed-systems experience.
+* **Test coverage:** The core Take/Give/Exact logic, tier boundary conditions, and reconciliation edge cases (concurrent reconnects, duplicate batch submission, partial ceiling admission) need real test suites.
+* **Security review:** Particularly around HMAC key management and the plausibility/anomaly-detection bounds on offline batch reconciliation.
+* **Platform adapters:** Square, Toast, Odoo, Clover, and others. If you know one of these platforms well, this is the most self-contained way to contribute.
+* **Documentation:** Clearer setup instructions, a proper API reference, and a "getting started" path. Check `CONTRIBUTING.md` for good-first-issue labels.
 
-Test coverage: The core Take/Give/Exact logic, tier boundary conditions, and reconciliation edge cases (concurrent reconnects, duplicate batch submission, partial ceiling admission) need real test suites.
+---
 
-Security review: Particularly around HMAC key management and the plausibility/anomaly-detection bounds on offline batch reconciliation.
+## Getting Started: Running the Server
 
-Platform adapters: Square, Toast, Odoo, Clover, and others. If you know one of these platforms well, this is the most self-contained way to contribute.
-
-Documentation: Clearer setup instructions, a proper API reference, and a "getting started" path. Check CONTRIBUTING.md for good-first-issue labels.
-
-Getting Started: Running the Server
 The DPB backend is built on Node.js and TypeScript.
 
-Prerequisites
-Node.js (v18+ recommended)
-Git
+### Prerequisites
+* Node.js (v18+ recommended)
+* Git
 
-Step 1: Clone the Repository
-git clone https://github.com/lefteri28-afk/digital-penny-bin.git
-
-Step 2: Navigate into the folder
-cd digital-penny-bin
-
-Step 3: Install Dependencies
-npm install
-
-Step 4: Build and Start the Server
-npm run build
-npm start
-
-Step 5: Access the Interface
-Open your browser and navigate to http://localhost:3000 to interact with the local DPB micro-ledger service.
-
-Questions & Getting in Touch
-Bug Reports & Feature Requests:\
-Please open an [Issue](https://github.com/lefteri28-afk/digital-penny-bin/issues) on GitHub.
-General Discussion & Architecture Q&A
-Join the conversation on [GitHub Discussions](https://github.com/lefteri28-afk/digital-penny-bin/discussions).
+### Step 1: Clone the Repository
+```bash
+git clone [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
