@@ -95,7 +95,7 @@ dpb/
 ├── tests/
 └── CONTRIBUTING.md
 
-## What Help Is Actually Needed
+### What Help Is Actually Needed
 
 * **Concurrency review:** The reconciliation engine uses version-checked compare-and-swap to serialize concurrent terminal writes and admission-control logic to prevent the shared balance's ceiling from being exceeded when multiple offline terminals reconcile at once. This needs eyes from someone with real distributed-systems experience.
 * **Test coverage:** The core Take/Give/Exact logic, tier boundary conditions, and reconciliation edge cases (concurrent reconnects, duplicate batch submission, partial ceiling admission) need real test suites.
