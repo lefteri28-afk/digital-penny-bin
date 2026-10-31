@@ -116,3 +116,38 @@ The DPB backend is built on Node.js and TypeScript.
 ### Step 1: Clone the Repository
 ```bash
 git clone [https://github.com/lefteri28-afk/digital-penny-bin.git](https://github.com/lefteri28-afk/digital-penny-bin.git)
+
+```
+
+### Step 2: Navigate into the folder
+
+```bash
+cd digital-penny-bin
+
+```
+
+### Step 3: Install Dependencies
+
+```bash
+npm install
+
+```
+
+### Step 4: Build and Start the Server
+
+```bash
+npm run build
+npm start
+
+```
+
+### Step 5: Access the Interface
+
+Open your browser and navigate to `http://localhost:3000` to interact with the local DPB micro-ledger service.
+
+---
+
+## Questions & Getting in Touch
+
+* **Bug Reports & Feature Requests:** Please open an [Issue](https://github.com/lefteri28-afk/digital-penny-bin/issues) on GitHub.
+* **General Discussion & Architecture Q&A:** Join the conversation on [GitHub Discussions](https://github.com/lefteri28-afk/digital-penny-bin/discussions).
